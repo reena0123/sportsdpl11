@@ -52,7 +52,7 @@ class RegisterUserController extends Controller{
 
 		try{
 			const v = this.validator(request.body,{
-				sponser_id: 'required|numeric|exists:User,mobile_number'
+				sponser_id: 'required'
 			});
 
 			const matched = await v.check();
@@ -63,11 +63,26 @@ class RegisterUserController extends Controller{
 				})		
 			}
 
-			const user = await User.findOne({where:{
+			const user = await User.findOne({
 				mobile_number: request.body.sponser_id
-			}})
+			})
 
-			return response.status(200).json({sponser_name:user.user_name});
+			console.log(user,request.body.sponser_id)
+
+			if(user){
+
+				return response.status(200).json({sponser_name:user.user_name});
+			}
+			
+			return response.status(400).json({
+				"error":{
+					"sponser_id":{
+						"message": "Invalid Sponser Id"
+					}
+				}
+			});
+
+
 		}catch(e){
 			console.log(e.message);
 			return response.status(400).json({error:"somthing went wrong"});
