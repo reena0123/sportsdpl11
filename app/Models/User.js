@@ -28,7 +28,10 @@ const UserSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now
 	},
-	
+	profile:{
+		type:String,
+		required: false
+	},
 	sponser_id:{
 		type: String,
 		min: 9,
@@ -71,21 +74,23 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: false
 	},
-
-	nominee_id_proof : {
+	pan_number : {
 		type: String,
-		required: false,
+		required:false
 	},
-
 	pan_card : {
 		type: String,
 		required: false
 	},
-	drivery_licence : {
+	adhar_number : {
 		type: String,
 		required: false
 	},
-	adhar_card : {
+	adhar_front : {
+		type: String,
+		required: false
+	},
+	adhar_back : {
 		type: String,
 		required: false
 	},

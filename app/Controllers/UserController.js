@@ -1,4 +1,4 @@
-const User = use('app/Models/User');
+	const User = use('app/Models/User');
 const Controller = use('app/Controllers/Controller');
 
 class UserController extends Controller{

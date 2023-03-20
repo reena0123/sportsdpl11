@@ -1,7 +1,7 @@
 const Route = use("config/bootstrap");
 const auth = use('app/Middleware/auth');
 const UserController = use("app/Controllers/UserController");
-//const ProfileController = use("app/Controllers/ProfileController");
+const ProfileController = use("app/Controllers/ProfileController");
 
 /*
 *------------------------------------------------------------------------
@@ -23,3 +23,10 @@ Route.delete('/api/user/:id',async(...args) => UserController.delete(...args) );
 *	User Routes End
 *------------------------------------------------------------------------
 */
+Route.post('/api/profile', auth, async(...args) => ProfileController.updateProfile(...args) );
+Route.post('/api/update/wallet', auth, async(...args) => ProfileController.updateWalletBalance(...args) );
+Route.get('/api/my-team', auth, async(...args) => ProfileController.myTeam(...args) );
+
+Route.get('/api/auth', auth, async(...args) => ProfileController.auth(...args) );
+Route.get('/api/transactions', auth, async(...args) => ProfileController.transaction(...args) );
+

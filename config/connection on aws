@@ -1,0 +1,28 @@
+ssh -i "REENA.pem" ubuntu@dpl11.com
+after server start got to folder 
+    cd /home/dpl11/
+    home/dpl11$ cd sportsdpl11/
+    pm2 restart index
+
+ abc#123456
+ dpl11_database_username
+ X3bPVtyqp5jav7hz
+
+
+ mongodb+srv://dpl11_database_username:X3bPVtyqp5jav7hz@cluster0.vvhgqdt.mongodb.net/?retryWrites=true&w=majority
+
+
+ mongosh "mongodb+srv://cluster0.vvhgqdt.mongodb.net/myFirstDatabase" --apiVersion 1 --username dpl11_database_username
+
+ mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&authSource=admin&appName=mongosh+1.8.0
+
+ role name
+ AWSServiceRoleForSupport
+
+ DPl_11_role
+ Role name
+Enter a meaningful name to identify this role.
+DPL11_Role
+
+user_name
+DPL11_Users
