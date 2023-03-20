@@ -19,14 +19,14 @@ class ProfileController extends Controller {
 	  				dob: request.body?.dob,
 	  				sponser_id: request.body?.sponser_id,*/
 	  				profile: this.storage('user/profile/',request.files?.profile).newFileName,
-	  				/*address: request.body?.address,
+	  				address: request.body?.address,
 	  				state: request.body?.state,
 	  				city: request.body?.city,
 	  				pincode: request.body?.pincode,
 	  				nominee_dob: request.body?.nominee_dob,
 	  				nominee_name: request.body?.nominee_name,
 	  				relation_with_nominee: request.body?.relation_with_nominee,
-	  				nominee_id_proof: request.body?.nominee_id_proof,
+	  				//nominee_id_proof: request.body?.nominee_id_proof,
 	  				pan_number: request.body.pan_number,
 	  				pan_card: this.storage('user/pan/',request.files.pan_card).newFileName,
 	  				adhar_number: request.body?.adhar_number,
@@ -42,7 +42,7 @@ class ProfileController extends Controller {
 	  					upi_provider: request.body.upi_provider,
 	  					upi_number: request.body.upi_number
 
-	  				}*/
+	  				}
 	  			}
 	  		});
 	  		response.send({user});
@@ -110,7 +110,9 @@ class ProfileController extends Controller {
   	async myTeam(request,response){
 
   		const users = await User.find({sponser_id: request.body.auth.mobile_number})
-  		.select('user_name').select('email').select('mobile_number')
+  		.select('user_name')
+  		.select('email')
+  		.select('mobile_number')
 
   		response.send(users)
   	}

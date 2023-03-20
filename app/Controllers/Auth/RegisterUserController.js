@@ -2,13 +2,12 @@ const TempUser = use('app/Models/TempUser');
 const User = use('app/Models/User');
 const Controller = use('app/Controllers/Controller');
 const crypto = require('crypto');
+const SMS = use("app/Helpers/SMS");
 
 class RegisterUserController extends Controller{
 
 	async store(request,response){
 
-
-		
 		try{
 
 			const v = this.validator(request.body,{
@@ -40,7 +39,7 @@ class RegisterUserController extends Controller{
 			});
 
 
-
+			SMS.registrationOTP(request.body.mobile_number,request.body.user_name,otp);
 			response.send({'data':'success',otp:otp});
 		}catch(e){
 

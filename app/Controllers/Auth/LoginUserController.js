@@ -1,5 +1,6 @@
 const User = use('app/Models/User');
 const Controller = use('app/Controllers/Controller');
+const SMS = use("app/Helpers/SMS");
 
 class LoginUserController extends Controller{
 
@@ -37,10 +38,13 @@ class LoginUserController extends Controller{
 				}
 			});
 
+			SMS.loginOTP(request.body.mobile_number,user.user_name,otp);
+
 			response.send({'data':'success',otp:otp});
 		}catch(e){
 
 			console.log(e.message)
+			console.log(e.stack)
 		}
 
 	}
