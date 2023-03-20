@@ -1,12 +1,13 @@
 const Controller = use("app/Controllers/Controller");
 const User = use('app/Models/User');
 const Transaction = use('app/Models/Transaction');
+const SMS = use("app/Helpers/SMS");
 
 class ProfileController extends Controller {
   
   	async updateProfile(request,response){
 
-  		//console.log(request.body,request.files)
+  		console.log(request.body,request.files)
   		try{
 
 
@@ -18,14 +19,14 @@ class ProfileController extends Controller {
 	  				dob: request.body?.dob,
 	  				sponser_id: request.body?.sponser_id,*/
 	  				profile: this.storage('user/profile/',request.files?.profile).newFileName,
-	  				address: request.body?.address,
+	  				/*address: request.body?.address,
 	  				state: request.body?.state,
 	  				city: request.body?.city,
 	  				pincode: request.body?.pincode,
 	  				nominee_dob: request.body?.nominee_dob,
 	  				nominee_name: request.body?.nominee_name,
 	  				relation_with_nominee: request.body?.relation_with_nominee,
-	  				/*nominee_id_proof: request.body?.nominee_id_proof,*/
+	  				nominee_id_proof: request.body?.nominee_id_proof,
 	  				pan_number: request.body.pan_number,
 	  				pan_card: this.storage('user/pan/',request.files.pan_card).newFileName,
 	  				adhar_number: request.body?.adhar_number,
@@ -41,7 +42,7 @@ class ProfileController extends Controller {
 	  					upi_provider: request.body.upi_provider,
 	  					upi_number: request.body.upi_number
 
-	  				}
+	  				}*/
 	  			}
 	  		});
 	  		response.send({user});
@@ -58,10 +59,11 @@ class ProfileController extends Controller {
 
   		try{
   			let user = {}
-  			const transaction = await Transaction.findOne({user_id: request.body.auth._id})
+  			const transaction = await Transaction.findOne({user: request.body.auth._id})
   			
-  			if(transaction.user_id != undefined){
+  			if(transaction?.user != undefined){
 
+  				
 		  		user = await User.updateOne({_id: request.body.auth._id},{
 		  			$set:{
 		  				wallet:{
@@ -70,8 +72,9 @@ class ProfileController extends Controller {
 		  			}
 		  		});
 
+		  		
 		  		Transaction.create({
-		  			user_id: request.body.auth._id,
+		  			user: request.body.auth._id,
 		  			type: 'CR',
 		  			amount: request.body?.amount,
 		  			status: request.body?.status
@@ -79,6 +82,7 @@ class ProfileController extends Controller {
 
   			}else{
 
+  				
   				user = await User.updateOne({_id: request.body.auth._id},{
 		  			$set:{
 		  				wallet:{
@@ -88,7 +92,7 @@ class ProfileController extends Controller {
 		  		});
 
 		  		Transaction.create({
-		  			user_id: request.body.auth._id,
+		  			user: request.body.auth._id,
 		  			type: 'CR',
 		  			amount: 100,
 		  			status: request.body?.status
@@ -118,11 +122,12 @@ class ProfileController extends Controller {
 
   	async transaction(request,response){
 
-  		const trans = await Transaction.find({user_id: request.body.auth._id})
+  		const trans = await Transaction.find({user: request.body.auth._id})
 
 
   		response.send({transaction:trans })
   	}
+
  }
 
 

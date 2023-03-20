@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const TransactionSchema = new mongoose.Schema({
 	
-	user_id:{
-		type: String,
-		max: 255
+	user:{
+		type:mongoose.Schema.Types.ObjectId,
+		ref:'User'
 	},
 
 	type:{
