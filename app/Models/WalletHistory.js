@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TransactionSchema = new mongoose.Schema({
+const WalletHistorySchema = new mongoose.Schema({
 	
 	user:{
 		type:mongoose.Schema.Types.ObjectId,
@@ -23,6 +23,6 @@ const TransactionSchema = new mongoose.Schema({
 	 timestamps:true
 });
 
-const Transaction = mongoose.model("Transaction", TransactionSchema);
+const WalletHistory = mongoose.model("WalletHistory", WalletHistorySchema);
 
-module.exports = Transaction;
+module.exports = WalletHistory;

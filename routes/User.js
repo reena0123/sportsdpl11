@@ -31,7 +31,7 @@ Route.post('/api/update/wallet', auth, async(...args) => ProfileController.updat
 Route.get('/api/my-team', auth, async(...args) => ProfileController.myTeam(...args) );
 
 Route.get('/api/auth', auth, async(...args) => ProfileController.auth(...args) );
-Route.get('/api/transactions', auth, async(...args) => ProfileController.transaction(...args) );
+Route.get('/api/wallet/history', auth, async(...args) => ProfileController.walletHistory(...args) );
 
 
 

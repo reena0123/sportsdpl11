@@ -1,6 +1,6 @@
 const Controller = use("app/Controllers/Controller");
 const User = use('app/Models/User');
-const Transaction = use('app/Models/Transaction');
+const WalletHistory = use('app/Models/WalletHistory');
 const SMS = use("app/Helpers/SMS");
 
 class ProfileController extends Controller {
@@ -59,9 +59,9 @@ class ProfileController extends Controller {
 
   		try{
   			let user = {}
-  			const transaction = await Transaction.findOne({user: request.body.auth._id})
+  			const walletHistory = await WalletHistory.findOne({user: request.body.auth._id})
   			
-  			if(transaction?.user != undefined){
+  			if(walletHistory?.user != undefined){
 
   				
 		  		user = await User.updateOne({_id: request.body.auth._id},{
@@ -73,7 +73,7 @@ class ProfileController extends Controller {
 		  		});
 
 		  		
-		  		Transaction.create({
+		  		WalletHistory.create({
 		  			user: request.body.auth._id,
 		  			type: 'CR',
 		  			amount: request.body?.amount,
@@ -91,7 +91,7 @@ class ProfileController extends Controller {
 		  			}
 		  		});
 
-		  		Transaction.create({
+		  		WalletHistory.create({
 		  			user: request.body.auth._id,
 		  			type: 'CR',
 		  			amount: 100,
@@ -112,9 +112,10 @@ class ProfileController extends Controller {
   		const users = await User.find({sponser_id: request.body.auth.mobile_number})
   		.select('user_name')
   		.select('email')
+  		.select('wallet')
   		.select('mobile_number')
 
-  		response.send(users)
+  		response.send({users})
   	}
 
   	async auth(request,response){
@@ -122,12 +123,12 @@ class ProfileController extends Controller {
   		response.send({user: request.body.auth})
   	}
 
-  	async transaction(request,response){
+  	async walletHistory(request,response){
 
-  		const trans = await Transaction.find({user: request.body.auth._id})
+  		const trans = await WalletHistory.find({user: request.body.auth._id})
 
 
-  		response.send({transaction:trans })
+  		response.send({wallet_history:trans })
   	}
 
  }
